@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div style="
+    align-items: center;
+    margin: auto;
+    ">
+        <h1 style="
+            position: relative;
+            margin: auto;
+            align-items: center;
+            text-align: center;">
+            <%= title %>
+        </h1>
+    </div>
+    <div class="main-container">
+    </div>
+    
+    <script>
+        var allRest = $.get( "http://localhost:3000/api/restorans/", function() {
+            console.log(allRest.responseJSON);
+            let dataObject = allRest.responseJSON;
+            for(let i = 0; i < dataObject.length; i++) {
+                $('.main-container').append(`<div class="container-restaurant" data-id="${dataObject[i].id}">${i}</div>`);
+                $('.main-container').append((`<h1>${dataObject[i].name}</h1>`));
+                for(let j = 0; j < dataObject[i].tables.length; j++) {
+                    $('.main-container').append('')
+                    
+                }
+            }
+        });
+    </script>
+    <%- include('./partials/link.ejs') %>
+</body>
+</html>
